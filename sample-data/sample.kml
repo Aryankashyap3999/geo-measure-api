@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<Placemark><name>field</name><Polygon><outerBoundaryIs><LinearRing><coordinates>
+77,0,0 77.1,0,0 77.1,0.1,0 77,0.1,0 77,0,0</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+<Placemark><name>road</name><LineString><coordinates>77,0,0 77.1,0,0</coordinates></LineString></Placemark>
+<Placemark><name>well</name><Point><coordinates>77.05,0.05,0</coordinates></Point></Placemark>
+</Document></kml>
