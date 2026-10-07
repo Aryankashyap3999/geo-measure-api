@@ -153,6 +153,16 @@ A local UTM zone is accurate to well under 1% inside a zone and needs no hardcod
 - Multi-geometries are measured because Shapefile polygons are very often `MultiPolygon`.
 - Geometry is returned as GeoJSON, properties go through GeoPandas' JSON writer so NaN and dates are API-safe.
 
+### Alternatives considered
+
+- **Django + DRF**: more setup (settings, migrations, serializers) than a database-less API needs; FastAPI gives typed models and docs for free.
+- **Fixed CRS for everything (EPSG:3857 or one UTM zone)**: simplest, but Web Mercator inflates areas away from the equator and one UTM zone is wrong elsewhere. A per-feature UTM zone is nearly as simple and far more accurate.
+- **Geodesic maths (`pyproj.Geod`)**: accurate everywhere, but the assignment asks for projected measurement and UTM is accurate enough inside a zone; listed under future scope.
+- **Fiona / ogr2ogr directly**: GeoPandas wraps the same GDAL readers and adds CRS and GeoJSON handling.
+- **Database / async job queue**: unnecessary for small synchronous uploads.
+
+The file info endpoint returns the summary fields from the assignment (`id`, `filename`, `feature_count`, `crs`, `status`) plus the features, so one call is enough for a client.
+
 ## Learning
 
 - Area/length in degrees is the classic geospatial bug; picking the CRS per feature is cheap with PyProj.
